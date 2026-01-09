@@ -51,7 +51,3 @@
       - zsh
     state: present
 
-- name: Change user shell
-  user:
-    name: "{{ username }}"
-    shell: "/usr/bin/zsh"

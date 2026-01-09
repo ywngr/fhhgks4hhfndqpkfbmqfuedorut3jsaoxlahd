@@ -1,16 +1,7 @@
-- name: Install packages
-  pacman:
-    name:
-      - bash-completion
-    state: present
-
-- name: Deploy .inputrc
-  copy:
-    src: files/inputrc
-    dest: /home/{{ username }}/.inputrc
-    owner: "{{ username }}"
-    group: "{{ username }}"
-    mode: '0644'
+- name: Change user shell
+  user:
+    name: "{{ username }}"
+    shell: "/usr/bin/zsh"
 
 - name: Deploy .bashrc
   copy:
