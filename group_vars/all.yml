@@ -1,0 +1,4 @@
+ansible_python_interpreter: /usr/bin/python3
+username: ywngr
+dotfiles_repo: https://github.com/ywngrr/dotfiles.git
+dotfiles_dir: /home/{{ username }}/.dotfiles

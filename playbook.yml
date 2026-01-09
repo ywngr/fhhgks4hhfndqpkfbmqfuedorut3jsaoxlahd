@@ -1,0 +1,14 @@
+- name: Arch Linux laptop setup
+  hosts: localhost
+  become: true
+
+  roles:
+    - base
+#    - shell
+#    - zsh
+    - kde
+    - systemd-boot
+    - rclone
+#    - audio
+#    - fonts
+#    - dotfiles

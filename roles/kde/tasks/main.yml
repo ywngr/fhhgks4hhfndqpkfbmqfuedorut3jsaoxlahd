@@ -1,0 +1,15 @@
+- name: Create sddm config directory
+  file:
+    path: /etc/sddm.conf.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Deploy sddm config
+  copy:
+    src: files/sddm/kde_settings.conf
+    dest: /etc/sddm.conf.d/kde_settings.conf
+    mode: '0644'
+    owner: root
+    group: root

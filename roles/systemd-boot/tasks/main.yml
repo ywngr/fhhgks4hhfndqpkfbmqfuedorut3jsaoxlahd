@@ -1,0 +1,42 @@
+- name: Find default (by archinstall) entry config
+  become: true
+  find:
+    paths: /boot/loader/entries/
+    patterns: "*-*_linux.conf"
+    file_type: file
+  register: old_config
+
+- name: Rename old config with pretty name
+  become: true
+  command: mv {{ old_config.files.0.path }} /boot/loader/entries/linux.conf
+  when: old_config.matched != 0
+
+- name: Grep options string
+  command: grep '^options' /boot/loader/entries/linux.conf
+  register: options_string
+  changed_when: false
+- name: Create lts-linux entry config
+  become: true
+  copy:
+    dest: /boot/loader/entries/linux-lts.conf
+    content: |
+      title   Arch Linux (linux-lts)
+      linux   /vmlinuz-linux-lts
+      initrd  /initramfs-linux-lts.img
+      {{ options_string.stdout }}
+    mode: '0755'
+    owner: root
+    group: root
+- name: Create zen-linux entry config
+  become: true
+  copy:
+    dest: /boot/loader/entries/linux-zen.conf
+    content: |
+      title   Arch Linux (linux-zen)
+      linux   /vmlinuz-linux-zen
+      initrd  /initramfs-linux-zen.img
+      {{ options_string.stdout }}
+    mode: '0755'
+    owner: root
+    group: root
+

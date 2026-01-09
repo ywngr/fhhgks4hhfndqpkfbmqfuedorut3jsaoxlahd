@@ -1,0 +1,57 @@
+- name: Update system
+  pacman:
+    update_cache: yes
+    upgrade: yes
+
+- name: Install base packages
+  pacman:
+    name:
+      - 7zip
+      - alacritty
+      - base
+      - base-devel
+      - bat
+      - bind
+      - curl
+      - firefox
+      - git
+      - gparted
+      - htop
+      - imagemagick
+      - jq
+      - keepassxc
+      - kitty
+      - less
+      - linux-lts
+      - linux-lts-headers
+      - linux-zen
+      - linux-zen-headers
+      - lsof
+      - mpv
+      - mpv-mpris
+      - neovim
+      - nicotine+
+      - nvtop
+      - obsidian
+      - pkgfile
+      - playerctl
+      - qbittorrent
+      - rclone
+      - socat
+      - strace
+      - strawberry
+      - tlp
+      - tlp-pd
+      - tlp-rdw
+      - tmux
+      - unzip
+      - whois
+      - wget
+      - yt-dlp
+      - zsh
+    state: present
+
+- name: Change user shell
+  user:
+    name: "{{ username }}"
+    shell: "/usr/bin/zsh"

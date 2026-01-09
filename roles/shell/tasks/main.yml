@@ -1,0 +1,49 @@
+- name: Install packages
+  pacman:
+    name:
+      - bash-completion
+    state: present
+
+- name: Deploy .inputrc
+  copy:
+    src: files/inputrc
+    dest: /home/{{ username }}/.inputrc
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0644'
+
+- name: Deploy .bashrc
+  copy:
+    src: files/bashrc
+    dest: /home/{{ username }}/.bashrc
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0644'
+
+- name: Create .bashrc.d directory
+  file:
+    path: /home/{{username}}/.bashrc.d
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0755'
+
+- name: Copy .bashrc.d drop-in files
+  copy:
+    src: files/bashrc.d/
+    dest: /home/{{ username }}/.bashrc.d/
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0644'
+
+- name: Check pkgfile's cache age
+  stat:
+    path: /var/cache/pkgfile/.db_version
+  register: pkgfile_stat
+
+- name: Update pkgfile only if cache is older than 7 days
+  become: true
+  command: pkgfile -u
+  when: >
+    not pkgfile_stat.stat.exists or 
+    (ansible_facts['date_time']['epoch'] | int) - (pkgfile_stat.stat.mtime | int) > 604800

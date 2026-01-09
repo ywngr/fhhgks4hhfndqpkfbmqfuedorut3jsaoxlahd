@@ -1,0 +1,37 @@
+- name: Create config directory
+  file:
+    state: directory
+    path: /home/{{ username}}/.config/rclone
+    owner: "{{ username}}"
+    group: "{{ username }}"
+    mode: '0755'
+
+- name: Touch rclone.conf
+  file:
+    state: touch
+    path: /home/{{ username}}/.config/rclone/rclone.conf
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0644'
+    force: no
+
+- name: Check config doesn't exist
+  command: grep -q dropbox /home/{{ username }}/.config/rclone/rclone.conf
+  ignore_errors: true
+  failed_when: false
+  register: dropbox_exist
+  changed_when: false
+
+- name: Configure remote dropbox
+  become: true
+  become_user: "{{ username }}"
+  shell: rclone config create db dropbox
+  when: dropbox_exist.rc != 0
+
+- name: Create dropbox directory
+  file:
+    state: directory
+    path: /home/{{ username }}/dropbox
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0755'

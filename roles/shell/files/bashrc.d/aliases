@@ -1,0 +1,34 @@
+# Aliases
+alias ll="ls --color=auto -alhF --group-directories-first"
+alias v=nvim
+alias vi=nvim
+alias vim=nvim
+alias le=less
+alias les=less
+alias gr='grep -Ri --color=auto'
+alias g='grep -i --color=auto'
+alias ..='cd ..'
+alias ...='cd ../../'
+alias cap='bat -p'
+alias ca='bat'
+alias c='bat'
+alias car='bat'
+alias cat='bat -p'
+alias f='find'
+alias grv='grep --color=auto -v -Ri'
+alias h='host'
+alias l='ls -l --color=auto'
+alias lat='ls -lath --color=auto'
+alias ltr='ls -latrh --color=auto'
+alias len='less -N'
+alias ht='htop'
+alias nv='nvtop'
+alias vt='nvtop'
+alias apt-get='sudo apt-get'
+alias apt='sudo apt'
+alias k='kubectl'
+alias mkp='pwgen -cn 20 3'
+alias eng='sgpt --role english_teacher'
+alias sudi='sudo -i'
+alias diff='diff --color=auto'
+alias pacman='sudo pacman'

@@ -1,0 +1,31 @@
+bk() { cp "$1" "$1.bak"; }
+
+popset() {
+   if [ "$1" == "perf" ];then
+      echo powersave |sudo tee  /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+      sudo powerprofilesctl set power-saver
+      echo performance |sudo tee  /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+      sudo powerprofilesctl set power-saver
+   elif [ "$1" == "save" ];then
+      echo powersave |sudo tee  /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+      sudo powerprofilesctl set power-saver
+   else
+     cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor 
+     echo "Profile: $(powerprofilesctl get)"
+  fi
+}
+
+lowff() {
+  shopt -s nullglob
+  for file in "$1"/*.{avi,mkv,mp4,mpeg,mov};do
+    ffmpeg -i "$file" -c:v libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p -preset veryfast -crf 23 -vf "scale=640:-2" -c:a libmp3lame -b:a 192k "${file%.*}_low.mp4"
+  done
+}
+
+dboxsync() {
+  addparams=""
+  if [ "$1" == "test" ];then
+    addparams="n"
+  fi
+  rclone -v"$addparams" copy "$HOME/dbox" db:
+}

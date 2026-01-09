@@ -1,0 +1,2 @@
+# Auto "cd" when entering just a path
+shopt -s autocd
