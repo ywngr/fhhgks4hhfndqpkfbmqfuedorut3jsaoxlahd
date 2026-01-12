@@ -1,6 +1,5 @@
 if [ -z "$TMUX" ] && [[ $- = *i* ]]; then
-   tmux
-    # Attach to an existing session named '00_main' or create a new one
-    # tmux attach-session -t 00_main || tmux new-session -s 00_main
+#   tmux
+   true
 fi
 

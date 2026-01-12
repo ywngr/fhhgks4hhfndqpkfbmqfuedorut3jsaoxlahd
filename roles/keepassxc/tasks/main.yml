@@ -28,13 +28,14 @@
       [General]
       AutoGeneratePasswordForNewEntries=true
       NumberOfRememberedLastDatabases=2
-      
       [Security]
       ClearClipboardTimeout=15
       IconDownloadFallback=true
-      
       [GUI]
       MinimizeOnClose=true
       MinimizeOnStartup=true
+      MinimizeToTray=true
       ShowTrayIcon=true
-      TrayIconAppearance=colorful
+      TrayIconAppearance=monochrome-dark
+      [SSHAgent]
+      Enabled=true

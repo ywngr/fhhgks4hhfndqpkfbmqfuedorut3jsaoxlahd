@@ -27,9 +27,16 @@
     path: "{{ home }}/.config/autostart"
     state: directory
     mode: '0755'
-#- name: Setting up desktop color
-#  community.general.ini_file:
-#    path: "{{ home }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
-#    section: 
-#    option:
-#    value: 
+
+- name: Create shortcut for drop-down terminal
+  ansible.builtin.lineinfile:
+    path: "{{ home }}/.config/kglobalshortcutsrc"
+    search_string: 'activate task manager entry 1='
+    line: 'activate task manager entry 1=`,Meta+1,Activate Task Manager Entry 1'
+
+- name: Create shortcut for drop-down terminal
+  ansible.builtin.lineinfile:
+    path: "{{ home }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
+    search_string: 'launchers='
+    line: 'launchers=applications:kitty.desktop,preferred://filemanager'
+
