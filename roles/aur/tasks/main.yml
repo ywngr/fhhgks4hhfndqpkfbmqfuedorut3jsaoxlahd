@@ -1,0 +1,8 @@
+- name: Install yay
+  shell: |
+    git clone https://aur.archlinux.org/yay.git /tmp/yay
+    cd /tmp/yay
+    makepkg -si --noconfirm
+  args:
+    creates: /usr/bin/yay
+
