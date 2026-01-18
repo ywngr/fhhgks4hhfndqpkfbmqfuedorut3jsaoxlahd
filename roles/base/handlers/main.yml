@@ -1,0 +1,6 @@
+- name: Reload systemd
+  systemd_service:
+    name: "{{ dropbox_service_name }}.service"
+    enabled: true
+    daemon_reload: true
+    scope: user

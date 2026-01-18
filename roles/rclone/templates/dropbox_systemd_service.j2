@@ -1,0 +1,12 @@
+[Unit]
+Description=Sync dropbox folder with inotifywait and rclone
+
+[Service]
+Type=exec
+ExecStart={{ home }}/.local/bin/dropbox_inotify.sh
+User={{ username }}
+Group={{ username }}
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

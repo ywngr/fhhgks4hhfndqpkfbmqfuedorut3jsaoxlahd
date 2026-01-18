@@ -67,3 +67,25 @@
     path: /etc/fstab
     line: "/dev/mapper/archive {{ home }}/archive ext4  rw,relatime,nofail	0 2"
     insertafter: EOF
+
+- name: Create directories
+  file:
+    state: directory
+    path: "{{ item }}"
+    mode: '0755'
+  loop:
+    - "{{ home }}/.local/share/icons"
+    - "{{ home }}/.local/bin"
+
+- name: Recursively copy custom icons
+  copy:
+    src: files/icons/
+    dest: "{{ home }}/.local/share/icons/"
+
+- name: Recursively copy custom scripts from templates
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ home }}/.local/bin/{{ item.path }}"
+    mode: '0555'
+  with_filetree: templates/scripts/
+  when: item.state == 'file'

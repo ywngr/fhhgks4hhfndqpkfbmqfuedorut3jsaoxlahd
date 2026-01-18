@@ -3,3 +3,8 @@
     src: files/include.conf
     dest: "{{ home }}/.config/kitty/kitty.conf"
 
+- name: Change taskbar icon
+  ansible.builtin.lineinfile:
+    path: "{{ home }}/.local/share/applications/kitty.desktop"
+    search_string: 'Icon='
+    line: "Icon=Monitor - White.tiff-0.png"

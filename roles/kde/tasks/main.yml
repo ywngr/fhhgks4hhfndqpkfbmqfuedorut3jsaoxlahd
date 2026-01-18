@@ -79,7 +79,7 @@
       [Containments][2][Applets][3][Configuration][General]
       favoritesDisplay=1
       favoritesPortedToKAstats=true
-      icon=kde-frameworks
+      icon=arch-legacy-aqua.svg
       paneSwap=true
       systemFavorites=suspend\\,hibernate\\,reboot\\,shutdown
       # --- Clock
@@ -93,9 +93,14 @@
       # --- Icons-Only Task Manager
       [Containments][2][Applets][5][Configuration][General]
       iconSpacing=0
+      showToolTips=false
+      indicateAudioStreams=false
+      tooltipControls=false
       # --- System Tray
       [Containments][2][Applets][7][General]
       iconSpacing=1
+      shownItems=KeePassXC,org.kde.plasma.volume,org.kde.plasma.bluetooth,org.kde.plasma.brightness,org.kde.plasma.keyboardlayout,org.kde.plasma.networkmanagement,org.kde.plasma.battery
+      hiddenItems=org.kde.plasma.clipboard,org.kde.plasma.manage-inputmethod
       [Containments][2][General]
       AppletOrder=3;5;6;7;21;4
 

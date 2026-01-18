@@ -44,3 +44,26 @@
   command: "rclone copy db:Obsidian {{ home }}/dropbox/Obsidian/"
   args:
     creates: "{{ home }}/dropbox/Obsidian/Zettelkasten/"
+
+- name: Copy dropbox_inotify.sh script
+  template:
+    src: templates/dropbox_inotify.sh
+    dest: "{{ home }}/.local/bin/dropbox_inotify.sh"
+    mode: '0544'
+  notify: Reload systemd
+
+- name: Copy systemd-service template
+  template:
+    src: templates/dropbox_systemd_service.j2
+    dest: "{{ home }}/.config/systemd/user/{{ dropbox_service_name }}.service"
+    mode: '0544'
+  notify: Reload systemd
+
+- name: Enable and start service
+  systemd_service:
+    name: "{{ dropbox_service_name }}.service"
+    scope: user
+    state: started
+    enabled: true
+    daemon_reload: true
+
