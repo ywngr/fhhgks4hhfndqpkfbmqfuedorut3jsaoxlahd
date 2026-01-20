@@ -22,6 +22,7 @@
       - imagemagick
       - inotify-tools
       - jq
+      - kdegraphics-thumbnailers
       - keepassxc
       - kitty
       - less
@@ -59,13 +60,13 @@
     mode: '0600'
     dest: /etc/crypttab
     content: |
-      archive LABEL=archive /etc/cryptsetup-keys.d/secondary.key  timeout=180,luks,nofail
+      {{ archive_name }} LABEL={{ archive_name }} /etc/cryptsetup-keys.d/secondary.key  timeout=180,luks,nofail
 
 - name: Add archive partition to fstab
   become: true
   lineinfile:
     path: /etc/fstab
-    line: "/dev/mapper/archive {{ home }}/archive ext4  rw,relatime,nofail	0 2"
+    line: "/dev/mapper/{{ archive_name }} {{ archive_path }} ext4  rw,relatime,nofail	0 2"
     insertafter: EOF
 
 - name: Create directories
@@ -89,3 +90,14 @@
     mode: '0555'
   with_filetree: templates/scripts/
   when: item.state == 'file'
+
+- name: Enabling multilib repository
+  become: true
+  blockinfile:
+    path: /etc/pacman.conf
+    append_newline: true
+    prepend_newline: true
+    block: |
+      [multilib]
+      Include = /etc/pacman.d/mirrorlist
+  notify: Upgrade arch system

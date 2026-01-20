@@ -159,3 +159,75 @@
       dimscreenEnabled=false
       screenedgeEnabled=false
       shakecursorEnabled=false
+
+- name: Disable file indexing in baloofilerc
+  blockinfile:
+    path: "{{ home }}/.config/krunnerrc"
+    append_newline: true
+    prepend_newline: true
+    block: |
+      [Plugins]
+      baloosearchEnabled=false
+
+- name: Disable file indexing in baloofilerc
+  blockinfile:
+    path: "{{ home }}/.config/baloofilerc"
+    append_newline: true
+    prepend_newline: true
+    block: |
+      [Basic Settings]
+      Indexing-Enabled=false
+
+- name: Copy user-dirs.dirs
+  template:
+    src: templates/user-dirs.dirs
+    dest: "{{ home }}/.config/user-dirs.dirs"
+    mode: '0600'
+
+- name: Copy kiorc
+  copy:
+    src: files/kiorc
+    dest: "{{ home }}/.config/kiorc"
+    mode: '0600'
+
+- name: Copy kscreenlockerrc
+  copy:
+    src: files/kscreenlockerrc
+    dest: "{{ home }}/.config/kscreenlockerrc"
+    mode: '0600'
+
+- name: Copy powerdevilrc
+  copy:
+    src: files/powerdevilrc
+    dest: "{{ home }}/.config/powerdevilrc"
+    mode: '0600'
+
+- name: Overrides for dolphinrc
+  blockinfile:
+    path: "{{ home }}/.config/dolphinrc"
+    append_newline: true
+    prepend_newline: true
+    block: |
+      [ContentDisplay]
+      UseShortRelativeDates=false
+      [DetailsMode]
+      ExpandableFolders=false
+      PreviewSize=64
+      [General]
+      OpenExternallyCalledFolderInNewTab=true
+      ShowFullPath=true
+      ShowStatusBar=FullWidth
+      [InformationPanel]
+      dateFormat=ShortFormat
+      showHovered=false
+      [KFileDialog Settings]
+      Places Icons Auto-resize=false
+      Places Icons Static Size=32
+      [MainWindow]
+      MenuBar=Disabled
+      [MainWindow][Toolbar mainToolBar]
+      ToolButtonStyle=IconOnly
+      [PlacesPanel]
+      IconSize=48
+      [PreviewSettings]
+      Plugins=appimagethumbnail,audiothumbnail,glycin-heif,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,glycin-image-rs,jpegthumbnail,glycin-jxl,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,gsthumbnail,glycin-svg,svgthumbnail

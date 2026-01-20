@@ -1,5 +1,7 @@
 ansible_python_interpreter: /usr/bin/python3
 username: ywngr
 home: /home/{{ username }}
+archive_name: archive
+archive_path: "{{ home }}/{{ archive_name }}"
 dotfiles_repo: https://github.com/ywngrr/dotfiles.git
 dotfiles_dir: /home/{{ username }}/.dotfiles

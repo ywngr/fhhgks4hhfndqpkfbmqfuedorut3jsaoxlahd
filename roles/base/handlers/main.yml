@@ -1,6 +1,14 @@
-- name: Reload systemd
+- name: Reload systemd in user scope
   systemd_service:
-    name: "{{ dropbox_service_name }}.service"
-    enabled: true
     daemon_reload: true
     scope: user
+
+- name: Reload systemd
+  systemd_service:
+    daemon_reload: true
+
+- name: Upgrade arch system
+  become: true
+  pacman:
+    update_cache: yes
+    upgrade: yes
