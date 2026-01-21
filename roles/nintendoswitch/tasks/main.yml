@@ -1,0 +1,21 @@
+- name: Download ryujinx
+  get_url:
+    url: "{{ ryujinx_appimage_url }}"
+    dest: "{{ archive_path }}/Apps/Ryujinx.AppImage"
+    mode: '0755'
+
+- name: Copy ryujinx.desktop file
+  template:
+    src: templates/ryujinx.desktop
+    dest: "{{ home}}/.local/share/applications/"
+
+- name: Download citron
+  get_url:
+    url: "{{ citron_appimage_url }}"
+    dest: "{{ archive_path }}/Apps/Citron.AppImage"
+    mode: '0755'
+
+- name: Copy citron.desktop file
+  template:
+    src: templates/citron.desktop
+    dest: "{{ home}}/.local/share/applications/"

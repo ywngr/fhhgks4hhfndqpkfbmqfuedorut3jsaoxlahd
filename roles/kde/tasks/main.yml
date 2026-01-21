@@ -40,6 +40,17 @@
     search_string: 'activate task manager entry 1='
     line: 'activate task manager entry 1=`,Meta+1,Activate Task Manager Entry 1'
 
+- name: Add change layout Shift+Alt shortcut
+  blockinfile:
+    path: "{{ home }}/.config/kglobalshortcutsrc"
+    append_newline: true
+    prepend_newline: true
+    block: |
+      [KDE Keyboard Layout Switcher]
+      Switch to Next Keyboard Layout=Alt+Shift,Meta+Alt+K,Switch to Next Keyboard Layout
+      [mediacontrol]
+      playpausemedia=Launch (1)\tMedia Play,Media Play,Play/Pause media playback
+
 - name: Create shortcut for drop-down terminal
   ansible.builtin.replace:
     path: "{{ home }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
@@ -99,10 +110,13 @@
       # --- System Tray
       [Containments][2][Applets][7][General]
       iconSpacing=1
-      shownItems=KeePassXC,org.kde.plasma.volume,org.kde.plasma.bluetooth,org.kde.plasma.brightness,org.kde.plasma.keyboardlayout,org.kde.plasma.networkmanagement,org.kde.plasma.battery
-      hiddenItems=org.kde.plasma.clipboard,org.kde.plasma.manage-inputmethod
+      shownItems=KeePassXC,org.kde.plasma.volume,org.kde.plasma.bluetooth,org.kde.plasma.keyboardlayout,org.kde.plasma.networkmanagement,org.kde.plasma.battery
+      hiddenItems=org.kde.plasma.clipboard,org.kde.plasma.manage-inputmethod,org.kde.plasma.mediacontroller,org.kde.plasma.brightness
       [Containments][2][General]
       AppletOrder=3;5;6;7;21;4
+      # --- Keyboard Layout Appearance
+      [Containments][2][Applets][7][Applets][12][Configuration][General]
+      displayStyle=Flag
 
 - name: Overrides for plasmashellrc
   blockinfile:
@@ -168,6 +182,21 @@
     block: |
       [Plugins]
       baloosearchEnabled=false
+      browserhistoryEnabled=false
+      browsertabsEnabled=false
+      krunner_bookmarksrunnerEnabled=false
+      krunner_dictionaryEnabled=false
+      krunner_katesessionsEnabled=false
+      krunner_konsoleprofilesEnabled=false
+      krunner_kwinEnabled=false
+      krunner_placesrunnerEnabled=false
+      krunner_recentdocumentsEnabled=false
+      krunner_shellEnabled=false
+      krunner_spellcheckEnabled=false
+      org.kde.activities2Enabled=false
+      org.kde.datetimeEnabled=false
+      [General]
+      FreeFloating=true
 
 - name: Disable file indexing in baloofilerc
   blockinfile:
@@ -231,3 +260,15 @@
       IconSize=48
       [PreviewSettings]
       Plugins=appimagethumbnail,audiothumbnail,glycin-heif,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,glycin-image-rs,jpegthumbnail,glycin-jxl,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,gsthumbnail,glycin-svg,svgthumbnail
+
+- name: Copy kxkbrc
+  copy:
+    src: files/kxkbrc
+    dest: "{{ home }}/.config/kxkbrc"
+    mode: '0600'
+
+- name: Copy kcminputrc mouse and touchpad speed config
+  copy:
+    src: files/kcminputrc
+    dest: "{{ home }}/.config/kcminputrc"
+    mode: '0600'

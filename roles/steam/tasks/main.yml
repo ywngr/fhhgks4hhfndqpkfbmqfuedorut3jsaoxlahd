@@ -4,4 +4,12 @@
     name:
       - steam
       - lib32-nvidia-utils
+      - mangohud
+      - lib32-mangohud
     state: present
+
+- name: Copy .desktop file
+  copy:
+    src: files/steam.desktop
+    dest: "{{ home }}/.local/share/applications/steam.desktop"
+    mode: '0600'

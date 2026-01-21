@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Ryujinx
+Comment=Nintendo Switch emulator
+Exec=env MANGOHUD=1 {{ archive_path }}/Apps/Ryujinx.AppImage
+Icon=ryujinx
+Terminal=false
+Type=Application
+Categories=Game;
+PrefersNonDefaultGPU=true
+X-KDE-RunOnDiscreteGpu=true
+

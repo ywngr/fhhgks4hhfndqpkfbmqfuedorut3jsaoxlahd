@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Citron
+Comment=Nintendo Switch emulator
+Exec=env MANGOHUD=1 {{ archive_path }}/Apps/Citron.AppImage
+Icon=citron
+Terminal=false
+Type=Application
+Categories=Game;
+PrefersNonDefaultGPU=true
+X-KDE-RunOnDiscreteGpu=true
+
