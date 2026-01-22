@@ -61,13 +61,32 @@
     dest: /etc/crypttab
     content: |
       {{ archive_name }} LABEL={{ archive_name }} /etc/cryptsetup-keys.d/secondary.key  timeout=180,luks,nofail
+      {{ archive_1tb_name }} LABEL={{ archive_1tb_name }} /etc/cryptsetup-keys.d/secondary.key  timeout=180,luks,nofail
+  notify: Reload systemd
 
-- name: Add archive partition to fstab
+- name: Ensure mount directories present
   become: true
-  lineinfile:
-    path: /etc/fstab
-    line: "/dev/mapper/{{ archive_name }} {{ archive_path }} ext4  rw,relatime,nofail	0 2"
-    insertafter: EOF
+  file:
+    path: "{{ item }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0755'
+    state: directory
+  loop:
+    - "{{ archive_path }}"
+    - "{{ archive_1tb_path }}"
+  notify: Reload systemd
+
+- name: Add partitions to fstab
+  become: true
+  blockinfile:
+    dest: /etc/fstab
+    append_newline: true
+    prepend_newline: true
+    content: |
+      /dev/mapper/{{ archive_name }} {{ archive_path }} ext4  rw,relatime,nofail	0 2
+      /dev/mapper/{{ archive_1tb_name }} {{ archive_1tb_path }} ext4  rw,relatime,nofail	0 2
+  notify: Reload systemd
 
 - name: Create directories
   file:

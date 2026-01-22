@@ -4,6 +4,7 @@
     scope: user
 
 - name: Reload systemd
+  become: true
   systemd_service:
     daemon_reload: true
 
