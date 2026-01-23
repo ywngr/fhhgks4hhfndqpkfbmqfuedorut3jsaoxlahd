@@ -16,6 +16,7 @@
     - tlp.service
     - tlp-pd.service
     - NetworkManager-dispatcher.service
+  notify: Systemd reload
 
 - name: Mask systemd-rfkill.service and systemd-rfkill.socket
   become: true
@@ -25,6 +26,7 @@
   loop:
     - systemd-rfkill.service
     - systemd-rfkill.socket
+  notify: Systemd reload
 
 - name: Copy drop-in config
   become: true
@@ -32,3 +34,4 @@
     src: files/tlp/tlp-config.conf
     dest: /etc/tlp.d/01-user.conf
     mode: '0644'
+  notify: tlp start

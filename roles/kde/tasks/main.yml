@@ -57,6 +57,13 @@
     regexp: '^launchers=.+$'
     replace: 'launchers=applications:kitty.desktop,applications:firefox.desktop,preferred://filemanager'
 
+- name: Replace firefox icon in .desktop file
+  become: true
+  replace:
+    path: /usr/share/applications/firefox.desktop
+    regexp: '^Icon=.+$'
+    replace: "Icon={{ home }}/.local/share/icons/Mozilla_Firefox_3.5_logo.png"
+
 - name: Disable application restoring after reboot
   copy:
     dest: "{{ home }}/.config/ksmserverrc"
