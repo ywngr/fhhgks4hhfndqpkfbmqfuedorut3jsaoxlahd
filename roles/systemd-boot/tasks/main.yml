@@ -30,7 +30,7 @@
     path: /boot/loader/entries/linux.conf
     insertafter: EOF
     block: |
-      options acpi_backlight=native mitigations=off
+      options {{ kernel_opts }}
 
 - name: Grep options string
   become: true
@@ -44,7 +44,7 @@
     create: true
     path: /boot/loader/entries/linux-{{ item }}.conf
     block: |
-      title   Arch Linux (linux-{{ item }})
+      title   Arch Linux {{ item | upper }}
       linux   /vmlinuz-linux-{{ item }}
       initrd  /initramfs-linux-{{ item }}.img
       {{ options_string.stdout }}

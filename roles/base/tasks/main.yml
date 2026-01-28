@@ -31,6 +31,8 @@
       - linux-zen
       - linux-zen-headers
       - lsof
+      - man-db
+      - man-pages
       - mpv
       - mpv-mpris
       - neovim
@@ -39,6 +41,7 @@
       - nvtop
       - obsidian
       - openssh
+      - pdfgrep
       - pkgfile
       - playerctl
       - qbittorrent
@@ -126,3 +129,13 @@
     state: link
     src: "{{ home }}/{{ archive_name }}/Downloads"
     dest: "{{ home }}/downloads"
+
+- name: Add russian locale
+  become: true
+  blockinfile:
+    path: /etc/locale.gen
+    append_newline: true
+    prepend_newline: true
+    block: |
+      ru_RU.UTF-8 UTF-8
+  notify: Update locale

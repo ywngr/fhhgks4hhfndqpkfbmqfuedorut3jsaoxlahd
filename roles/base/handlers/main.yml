@@ -13,3 +13,7 @@
   pacman:
     update_cache: yes
     upgrade: yes
+
+- name: Update locale
+  become: true
+  command: locale-gen

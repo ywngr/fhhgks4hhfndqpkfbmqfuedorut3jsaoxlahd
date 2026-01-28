@@ -15,6 +15,7 @@
     - { role: steam, tags: ['steam'] }
     - { role: nintendoswitch, tags: ['nintendoswitch'] }
     - { role: mpv, tags: ['mpv'] }
+    - { role: tmux, tags: ['tmux'] }
 #    - { role: zsh, tags: ['zsh'] }
 #    - aur
 #    - audio

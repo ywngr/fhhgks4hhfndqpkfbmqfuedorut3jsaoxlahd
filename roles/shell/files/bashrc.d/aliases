@@ -1,12 +1,17 @@
 # Aliases
 alias ll="ls --color=auto -alhF --group-directories-first"
+alias l='ls -l --color=auto'
+alias lat='ls -lath --color=auto'
+alias ltr='ls -latrh --color=auto'
 alias v=nvim
 alias vi=nvim
 alias vim=nvim
 alias le=less
 alias les=less
+alias len='less -N'
 alias gr='grep -Ri --color=auto'
 alias g='grep -i --color=auto'
+alias grv='grep --color=auto -v -Ri'
 alias ..='cd ..'
 alias ...='cd ../../'
 alias cap='bat -p'
@@ -15,12 +20,7 @@ alias c='bat'
 alias car='bat'
 alias cat='bat -p'
 alias f='find'
-alias grv='grep --color=auto -v -Ri'
 alias h='host'
-alias l='ls -l --color=auto'
-alias lat='ls -lath --color=auto'
-alias ltr='ls -latrh --color=auto'
-alias len='less -N'
 alias ht='htop'
 alias nv='nvtop'
 alias vt='nvtop'

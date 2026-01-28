@@ -1,0 +1,5 @@
+- name: Ensure config directory present
+  file:
+    state: directory
+    path: "{{ home }}/.config/tmux"
+    mode: '0755'

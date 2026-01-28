@@ -1,21 +1,18 @@
-- name: Download ryujinx
-  get_url:
-    url: "{{ ryujinx_appimage_url }}"
-    dest: "{{ archive_path }}/Apps/Ryujinx.AppImage"
-    mode: '0755'
+- name: Download emulators from dropbox
+  shell: |
+    rclone copy db:Apps/{{ item }} {{ home }}/{{ archive_name }}/Apps/
+    chmod 755 {{ home }}/{{ archive_name }}/Apps/{{ item }}
+  args:
+    creates: "{{ home }}/{{ archive_name }}/Apps/{{ item }}"
+  loop:
+    - Ryujinx.AppImage
+    - Citron.AppImage
 
-- name: Copy ryujinx.desktop file
+- name: Copy .desktop files
   template:
-    src: templates/ryujinx.desktop
+    src: "templates/{{ item }}.desktop"
     dest: "{{ home}}/.local/share/applications/"
+  loop:
+    - ryujinx
+    - citron
 
-- name: Download citron
-  get_url:
-    url: "{{ citron_appimage_url }}"
-    dest: "{{ archive_path }}/Apps/Citron.AppImage"
-    mode: '0755'
-
-- name: Copy citron.desktop file
-  template:
-    src: templates/citron.desktop
-    dest: "{{ home}}/.local/share/applications/"
