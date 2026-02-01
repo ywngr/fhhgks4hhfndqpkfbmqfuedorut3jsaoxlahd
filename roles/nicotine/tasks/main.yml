@@ -1,0 +1,10 @@
+- name: Create config folder
+  file:
+    path: "{{ home }}/.config/nicotine"
+    state: directory
+
+- name: Include custom config
+  blockinfile:
+    path: "{{ home }}/.config/nicotine/config"
+    block: "{{ lookup('template', 'files/include_config') }}"
+    insertafter: EOF

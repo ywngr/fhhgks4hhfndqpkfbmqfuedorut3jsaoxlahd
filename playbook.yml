@@ -2,6 +2,7 @@
   hosts: localhost
   roles:
     - { role: base, tags: ['base'] }
+    - { role: users, tags: ['users'] }
     - { role: shell, tags: ['shell'] }
     - { role: kde, tags: ['kde'] }
     - { role: kitty, tags: ['kitty'] }
@@ -16,8 +17,9 @@
     - { role: nintendoswitch, tags: ['nintendoswitch'] }
     - { role: mpv, tags: ['mpv'] }
     - { role: tmux, tags: ['tmux'] }
+    - { role: nicotine, tags: ['nicotine'] }
+    - { role: aur, tags: ['aur'] }
 #    - { role: zsh, tags: ['zsh'] }
-#    - aur
 #    - audio
 #    - fonts
 #    - dotfiles

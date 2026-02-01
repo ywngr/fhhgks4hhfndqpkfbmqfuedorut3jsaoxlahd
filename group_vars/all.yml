@@ -8,3 +8,4 @@ archive_1tb_path: "{{ home }}/{{ archive_1tb_name }}"
 dotfiles_repo: https://github.com/ywngrr/dotfiles.git
 dotfiles_dir: /home/{{ username }}/.dotfiles
 kernel_opts: "acpi_backlight=native mitigations=off"
+ansible_user: ansible_user

@@ -14,9 +14,12 @@
       - base-devel
       - bat
       - bind
+      - cuetools
       - curl
       - firefox
+      - flac
       - git
+      - go
       - gparted
       - htop
       - imagemagick
@@ -46,11 +49,14 @@
       - playerctl
       - qbittorrent
       - rclone
+      - reaper
+      - rust
       - socat
       - strace
       - strawberry
       - tmux
       - unzip
+      - wavpack
       - whois
       - wget
       - yt-dlp

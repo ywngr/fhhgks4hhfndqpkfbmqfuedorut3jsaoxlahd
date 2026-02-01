@@ -1,0 +1,17 @@
+- name: Add user 'ansible_user'
+  become: true
+  user:
+    name: "{{ ansible_user }}"
+    comment: "Ansible managed user"
+    uid: 1001
+    create_home: true
+    shell: /usr/bin/nologin
+    state: present
+
+- name: Allow 'ansible_user' to use sudo without password
+  become: true
+  lineinfile:
+    path: /etc/sudoers.d/10-aur-user
+    line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+    create: yes
+    validate: 'visudo -cf %s'

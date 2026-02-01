@@ -1,9 +1,47 @@
-- name: Install yay
-  become: true
-  shell: |
-    git clone https://aur.archlinux.org/yay.git /tmp/yay
-    cd /tmp/yay
-    makepkg -si --noconfirm
-  args:
-    creates: /usr/bin/yay
+- name: Check if paru is installed
+  command: which paru
+  register: paru_check
+  changed_when: false
+  failed_when: false
 
+- name: Clone paru AUR repo
+  git:
+    repo: https://aur.archlinux.org/paru.git
+    dest: /tmp/paru
+  when: paru_check.rc != 0
+  become: false
+
+- name: Build and install paru
+  command: makepkg -s --noconfirm
+  args:
+    chdir: /tmp/paru
+  when: paru_check.rc != 0
+  become: false
+
+- name: Find paru package
+  find:
+    paths: /tmp/paru
+    patterns: "paru-[0-9]*.pkg.tar.zst"
+  when: paru_check.rc != 0
+  register: paru_pkg
+  
+- name: Install paru package
+  command: pacman -U --noconfirm {{ paru_pkg.files[0].path }}
+  when: paru_check.rc != 0
+  become: true
+  notify: paru gendb
+
+- name: Remove paru build dir
+  file:
+    path: /tmp/paru
+    state: absent
+  when: paru_check.rc != 0
+
+- name: Install packages
+  become: yes
+  become_user: "{{ ansible_user }}"
+  command: "paru -S --noconfirm --needed {{ item }}"
+  register: paru_result
+  changed_when: "'Installing' in paru_result.stdout"
+  loop:
+    - shntool
