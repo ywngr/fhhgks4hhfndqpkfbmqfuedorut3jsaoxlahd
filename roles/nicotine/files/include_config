@@ -31,3 +31,4 @@ exitdialog = 2
 
 [server]
 autoaway = 0
+portrange = (55126, 55126)

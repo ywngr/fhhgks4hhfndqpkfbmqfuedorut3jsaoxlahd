@@ -3,3 +3,6 @@ PointerAcceleration=0.400
 
 [Libinput][9639][64160][ProtoArc EM15]
 PointerAcceleration=0.200
+
+[Mouse]
+cursorSize=30

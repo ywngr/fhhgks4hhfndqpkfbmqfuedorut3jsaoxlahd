@@ -2,6 +2,7 @@
   become: true
   pacman:
     name:
+      - gwenview
       - kwalletmanager
 
 - name: Create sddm config directory
@@ -66,7 +67,7 @@
     regexp: '^Icon=.+$'
     replace: "Icon={{ home }}/.local/share/icons/Mozilla_Firefox_3.5_logo.png"
 
-- name: Replace firefox icon in .desktop file
+- name: Replace dolphin icon in .desktop file
   become: true
   replace:
     path: /usr/share/applications/org.kde.dolphin.desktop
@@ -163,17 +164,23 @@
     search_string: 'Gtk/EnableAnimations'
     line: 'Gtk/EnableAnimations 0'
 
-- name: Disable animation gtk-3.0
+- name: Disable animation gtk
   lineinfile:
-    path: "{{ home }}/.config/gtk-3.0/settings.ini"
+    path: "{{ home }}/.config/{{ item }}/settings.ini"
     search_string: 'gtk-enable-animations'
     line: 'gtk-enable-animations=false'
+  loop:
+    - gtk-3.0
+    - gtk-4.0
 
-- name: Disable animation gtk-4.0
+- name: Setting gtk pointer size
   lineinfile:
-    path: "{{ home }}/.config/gtk-4.0/settings.ini"
-    search_string: 'gtk-enable-animations'
-    line: 'gtk-enable-animations=false'
+    path: "{{ home }}/.config/{{ item }}/settings.ini"
+    search_string: 'gtk-cursor-theme-size'
+    line: 'gtk-cursor-theme-size=30'
+  loop:
+    - gtk-3.0
+    - gtk-4.0
 
 - name: Apply Desktop Effects kwinrc file
   blockinfile:
@@ -189,6 +196,8 @@
       dimscreenEnabled=false
       screenedgeEnabled=false
       shakecursorEnabled=false
+      [MouseBindings]
+      CommandWindow1=Activate and raise
 
 - name: Disable file indexing in baloofilerc
   blockinfile:

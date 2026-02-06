@@ -1,0 +1,2 @@
+- name: Get music list
+  shell: "ls {{ archive_path }}/Music/ > {{ ansible_path }}/roles/states/output_files/music_list"

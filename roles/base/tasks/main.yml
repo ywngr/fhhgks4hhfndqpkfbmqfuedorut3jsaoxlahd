@@ -16,6 +16,7 @@
       - bind
       - cuetools
       - curl
+      - feh
       - firefox
       - flac
       - git

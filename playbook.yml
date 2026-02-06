@@ -19,6 +19,7 @@
     - { role: tmux, tags: ['tmux'] }
     - { role: nicotine, tags: ['nicotine'] }
     - { role: aur, tags: ['aur'] }
+    - { role: states, tags: ['states'] }
 #    - { role: zsh, tags: ['zsh'] }
 #    - audio
 #    - fonts
