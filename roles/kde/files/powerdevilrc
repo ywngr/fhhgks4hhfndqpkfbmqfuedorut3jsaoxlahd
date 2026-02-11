@@ -1,11 +1,17 @@
 [AC][Display]
 TurnOffDisplayIdleTimeoutSec=1800
 
+[AC][RunScript]
+ProfileLoadCommand=kscreen-doctor output.1.mode.2
+
 [AC][SuspendAndShutdown]
 AutoSuspendAction=0
 
 [Battery][Display]
 TurnOffDisplayIdleTimeoutSec=1800
+
+[Battery][RunScript]
+ProfileLoadCommand=kscreen-doctor output.1.mode.1
 
 [Battery][SuspendAndShutdown]
 AutoSuspendAction=0

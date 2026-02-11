@@ -70,8 +70,8 @@
     mode: '0600'
     dest: /etc/crypttab
     content: |
-      {{ archive_name }} LABEL={{ archive_name }} /etc/cryptsetup-keys.d/secondary.key  timeout=180,luks,nofail
-      {{ archive_1tb_name }} LABEL={{ archive_1tb_name }} /etc/cryptsetup-keys.d/secondary.key  timeout=180,luks,nofail
+      {{ archive_name }} LABEL={{ archive_name }} /etc/cryptsetup-keys.d/secondary.key  timeout=180,luks
+      {{ archive_1tb_name }} LABEL={{ archive_1tb_name }} /etc/cryptsetup-keys.d/secondary.key  timeout=180,luks
   notify: Reload systemd
 
 - name: Ensure mount directories present
@@ -94,8 +94,8 @@
     append_newline: true
     prepend_newline: true
     content: |
-      /dev/mapper/{{ archive_name }} {{ archive_path }} ext4  rw,relatime,nofail	0 2
-      /dev/mapper/{{ archive_1tb_name }} {{ archive_1tb_path }} ext4  rw,relatime,nofail	0 2
+      /dev/mapper/{{ archive_name }} {{ archive_path }} ext4  rw,relatime	0 2
+      /dev/mapper/{{ archive_1tb_name }} {{ archive_1tb_path }} ext4  rw,relatime	0 2
   notify: Reload systemd
 
 - name: Create directories

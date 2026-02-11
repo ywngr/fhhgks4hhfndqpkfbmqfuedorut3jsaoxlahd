@@ -1,0 +1,15 @@
+[General]
+autoSaveImage=true
+
+[GuiConfig]
+quitAfterSaveCopyExport=true
+
+[ImageSave]
+imageCompressionQuality=40
+imageFilenameTemplate=Screenshot_<dd><MMM><yy>_<HH><mm>
+imageSaveLocation=file://{{ archive_path }}/Pictures/Screenshots/
+translatedScreenshotsFolder=Screenshots
+preferredImageFormat=JPEG
+
+[VideoSave]
+translatedScreencastsFolder=Screencasts

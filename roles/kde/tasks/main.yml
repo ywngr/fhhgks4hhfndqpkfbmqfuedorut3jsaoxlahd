@@ -40,6 +40,7 @@
     path: "{{ home }}/.config/kglobalshortcutsrc"
     search_string: 'activate task manager entry 1='
     line: 'activate task manager entry 1=`,Meta+1,Activate Task Manager Entry 1'
+  changed_when: false
 
 - name: Add change layout Shift+Alt shortcut
   blockinfile:
@@ -53,6 +54,7 @@
       playpausemedia=Launch (1)\tMedia Play,Media Play,Play/Pause media playback
       nextmedia=Shift+Volume Up,Media Next,Media playback next
       previousmedia=Shift+Volume Down,Media Previous,Media playback previous
+  changed_when: false
 
 - name: Create shortcut for drop-down terminal
   ansible.builtin.replace:
@@ -134,6 +136,7 @@
       # --- Keyboard Layout Appearance
       [Containments][2][Applets][7][Applets][12][Configuration][General]
       displayStyle=Flag
+  changed_when: false
 
 - name: Overrides for plasmashellrc
   blockinfile:
@@ -151,6 +154,7 @@
       panelLengthMode=1
       [PlasmaViews][Panel 2][Defaults]
       thickness=68
+  changed_when: false
 
 - name: Disable animation kdeglobals
   lineinfile:
@@ -198,6 +202,7 @@
       shakecursorEnabled=false
       [MouseBindings]
       CommandWindow1=Activate and raise
+  changed_when: false
 
 - name: Disable file indexing in baloofilerc
   blockinfile:
@@ -237,6 +242,7 @@
     src: templates/user-dirs.dirs
     dest: "{{ home }}/.config/user-dirs.dirs"
     mode: '0600'
+  changed_when: false
 
 - name: Copy kiorc
   copy:
@@ -285,6 +291,7 @@
       IconSize=48
       [PreviewSettings]
       Plugins=appimagethumbnail,audiothumbnail,glycin-heif,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,glycin-image-rs,jpegthumbnail,glycin-jxl,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,gsthumbnail,glycin-svg,svgthumbnail
+  changed_when: false
 
 - name: Copy kxkbrc
   copy:
@@ -297,3 +304,9 @@
     src: files/kcminputrc
     dest: "{{ home }}/.config/kcminputrc"
     mode: '0600'
+
+- name: Copy spectaclerc config
+  template:
+    src: templates/spectaclerc
+    dest: "{{ home }}/.config/spectaclerc"
+  changed_when: false

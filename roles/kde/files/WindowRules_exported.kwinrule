@@ -1,12 +1,12 @@
-[Firefox]
-Description=Firefox
+[Firefox 1845x1200]
+Description=Firefox 1845x1200
 ignoregeometry=true
 ignoregeometryrule=2
 noborder=true
 noborderrule=2
-position=0,0
+position=35,35
 positionrule=3
-size=1845,1200
+size=1775,1130
 sizerule=2
 types=1
 wmclass=firefox
@@ -42,6 +42,8 @@ position=0,0
 positionrule=2
 size=1845,1200
 sizerule=2
+skippager=true
+skippagerrule=3
 skipswitcher=true
 skipswitcherrule=3
 types=1

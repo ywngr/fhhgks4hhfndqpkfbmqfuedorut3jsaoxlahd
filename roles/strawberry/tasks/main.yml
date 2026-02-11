@@ -8,3 +8,4 @@
     path: "{{ home }}/.config/strawberry/strawberry.conf"
     block: "{{ lookup('template', 'files/include_config') }}"
     insertafter: EOF
+  changed_when: false

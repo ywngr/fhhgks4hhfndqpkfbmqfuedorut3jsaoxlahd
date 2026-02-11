@@ -21,6 +21,7 @@
       SplitterState=230, 1667
       [SSHAgent]
       AuthSockOverride=/run/user/1000/ssh-agent.socket
+  changed_when: false
 
 - name: Insert/Update configuration block in .config/keepasscx
   ansible.builtin.blockinfile:
@@ -42,3 +43,4 @@
       TrayIconAppearance=colorful
       [SSHAgent]
       Enabled=true
+  changed_when: false
